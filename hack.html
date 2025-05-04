@@ -40,25 +40,33 @@
   </style>
 </head>
 <body>
-  <h1>⚠️ Attention : vous avez été piraté ⚠️</h1>
+  <h1>⚠️ ATTENTION : Vous avez été piraté ! ⚠️</h1>
   <div id="progress-bar">
     <div id="progress">0%</div>
   </div>
-  <video autoplay muted loop>
-    <source src="https://cdn.pixabay.com/vimeo/763192033/hack-124162.mp4?width=1280&hash=228e3b6df79d9e8d99de6590709e1509a52c7a3e" type="video/mp4">
+  <video id="hack-video" autoplay muted loop playsinline>
+    <source src="https://player.vimeo.com/external/497143248.sd.mp4?s=07d3066ce40d9dbefc35fc83a623871a9d482a6f&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
     Votre navigateur ne supporte pas la vidéo.
   </video>
 
+  <audio id="alert-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-warning-alarm-buzzer-991.mp3"></audio>
+
   <script>
+    const progressEl = document.getElementById("progress");
+    const alertSound = document.getElementById("alert-sound");
+
     let progress = 0;
-    const bar = document.getElementById("progress");
     const interval = setInterval(() => {
-      progress += 1;
-      bar.style.width = progress + "%";
-      bar.textContent = progress + "%";
+      progress += 2;
+      progressEl.style.width = progress + "%";
+      progressEl.textContent = progress + "%";
+      if (progress === 10) {
+        alertSound.play();
+        if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
+      }
       if (progress >= 100) {
         clearInterval(interval);
-        bar.textContent = "Téléchargement terminé";
+        progressEl.textContent = "Téléchargement terminé";
       }
     }, 100);
   </script>
