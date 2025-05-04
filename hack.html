@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Piratage en cours</title>
+  <style>
+    body {
+      background: #000;
+      color: red;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    #progress-bar {
+      width: 100%;
+      background: #222;
+      margin-top: 30px;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 30px;
+    }
+    #progress {
+      height: 100%;
+      width: 0%;
+      background: red;
+      color: white;
+      line-height: 30px;
+    }
+    video {
+      margin-top: 40px;
+      width: 100%;
+      max-width: 600px;
+      border: 2px solid red;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚠️ Attention : vous avez été piraté ⚠️</h1>
+  <div id="progress-bar">
+    <div id="progress">0%</div>
+  </div>
+  <video autoplay muted loop>
+    <source src="https://cdn.pixabay.com/vimeo/763192033/hack-124162.mp4?width=1280&hash=228e3b6df79d9e8d99de6590709e1509a52c7a3e" type="video/mp4">
+    Votre navigateur ne supporte pas la vidéo.
+  </video>
+
+  <script>
+    let progress = 0;
+    const bar = document.getElementById("progress");
+    const interval = setInterval(() => {
+      progress += 1;
+      bar.style.width = progress + "%";
+      bar.textContent = progress + "%";
+      if (progress >= 100) {
+        clearInterval(interval);
+        bar.textContent = "Téléchargement terminé";
+      }
+    }, 100);
+  </script>
+</body>
+</html>
