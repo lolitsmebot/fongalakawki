@@ -2,25 +2,27 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>La Poste - Suivi colis</title>
+  <title>La Poste - Suivi</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f5f5f5;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       margin: 0;
-      padding: 0;
     }
     .container {
-      max-width: 500px;
       background: white;
-      padding: 30px;
+      padding: 40px;
       border-radius: 15px;
-      margin: 80px auto;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
       text-align: center;
+      width: 400px;
     }
     h2 {
-      color: #333;
+      margin-bottom: 20px;
     }
     button {
       background-color: #ffcc00;
@@ -30,70 +32,18 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      margin-top: 20px;
-    }
-    #hack-section {
-      display: none;
-      margin-top: 30px;
-      color: red;
-    }
-    #progress-bar {
-      width: 100%;
-      background: #ddd;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 15px;
-    }
-    #progress {
-      width: 0%;
-      height: 20px;
-      background: red;
-      text-align: center;
-      color: white;
-      font-weight: bold;
-    }
-    video {
-      margin-top: 20px;
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h2>Votre colis est prêt à être livré</h2>
-    <p>Merci de confirmer vos informations pour finaliser la livraison.</p>
-    <button onclick="startHack()">Télécharger l'application</button>
-
-    <div id="hack-section">
-      <h3>Vous avez été piraté !</h3>
-      <div id="progress-bar">
-        <div id="progress">0%</div>
-      </div>
-      <video id="hack-video" autoplay muted>
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la vidéo.
-      </video>
-    </div>
+    <p>Veuillez confirmer en téléchargeant l'application mobile.</p>
+    <a href="hack.html">
+      <button>Télécharger l'application</button>
+    </a>
   </div>
-
-  <script>
-    function startHack() {
-      document.getElementById("hack-section").style.display = "block";
-      let progress = 0;
-      const bar = document.getElementById("progress");
-      const interval = setInterval(() => {
-        progress += 2;
-        bar.style.width = progress + "%";
-        bar.textContent = progress + "%";
-        if (progress >= 100) {
-          clearInterval(interval);
-          bar.textContent = "Téléchargement terminé";
-        }
-      }, 100);
-    }
-  </script>
 </body>
 </html>
+
 
