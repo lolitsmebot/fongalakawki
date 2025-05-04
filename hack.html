@@ -15,6 +15,16 @@
     h1 {
       font-size: 28px;
     }
+    button {
+      background: red;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      margin-top: 30px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
     #progress-bar {
       width: 100%;
       background: #222;
@@ -22,6 +32,7 @@
       border-radius: 10px;
       overflow: hidden;
       height: 30px;
+      display: none;
     }
     #progress {
       height: 100%;
@@ -36,39 +47,51 @@
       max-width: 600px;
       border: 2px solid red;
       border-radius: 10px;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>⚠️ ATTENTION : Vous avez été piraté ! ⚠️</h1>
+  <h1>⚠️ ATTENTION : Cliquez pour lancer le piratage</h1>
+  <button onclick="startPiratage()">Lancer le piratage</button>
+
   <div id="progress-bar">
     <div id="progress">0%</div>
   </div>
-  <video id="hack-video" autoplay muted loop playsinline>
-    <source src="https://player.vimeo.com/external/497143248.sd.mp4?s=07d3066ce40d9dbefc35fc83a623871a9d482a6f&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
+
+  <video id="hack-video" loop>
+    <source src="https://player.vimeo.com/external/497143248.sd.mp4?s=07d3066ce40d9dbefc35fc83a623871a9d482a6f&profile_id=164" type="video/mp4">
     Votre navigateur ne supporte pas la vidéo.
   </video>
 
   <audio id="alert-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-warning-alarm-buzzer-991.mp3"></audio>
 
   <script>
-    const progressEl = document.getElementById("progress");
-    const alertSound = document.getElementById("alert-sound");
+    function startPiratage() {
+      const video = document.getElementById("hack-video");
+      const sound = document.getElementById("alert-sound");
+      const bar = document.getElementById("progress");
+      const progressBar = document.getElementById("progress-bar");
 
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress += 2;
-      progressEl.style.width = progress + "%";
-      progressEl.textContent = progress + "%";
-      if (progress === 10) {
-        alertSound.play();
-        if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
-      }
-      if (progress >= 100) {
-        clearInterval(interval);
-        progressEl.textContent = "Téléchargement terminé";
-      }
-    }, 100);
+      video.style.display = "block";
+      progressBar.style.display = "block";
+
+      video.play();
+      sound.play();
+      if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 2;
+        bar.style.width = progress + "%";
+        bar.textContent = progress + "%";
+        if (progress >= 100) {
+          clearInterval(interval);
+          bar.textContent = "Téléchargement terminé";
+        }
+      }, 100);
+    }
   </script>
 </body>
 </html>
+
