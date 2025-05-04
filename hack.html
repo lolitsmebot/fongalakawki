@@ -4,36 +4,49 @@
   <meta charset="UTF-8">
   <title>Piratage en cours</title>
   <style>
-    body {
-      background: #000;
-      color: red;
-      font-family: 'Courier New', monospace;
+    html, body {
       margin: 0;
-      padding: 40px;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Courier New', monospace;
+      color: red;
       text-align: center;
     }
+
+    video#bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 15px;
+    }
+
     h1 {
-      font-size: 28px;
+      font-size: 32px;
+      margin-bottom: 20px;
     }
-    button {
-      background: red;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 18px;
-      margin-top: 30px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+
     #progress-bar {
       width: 100%;
       background: #222;
-      margin-top: 30px;
       border-radius: 10px;
       overflow: hidden;
       height: 30px;
-      display: none;
     }
+
     #progress {
       height: 100%;
       width: 0%;
@@ -41,57 +54,36 @@
       color: white;
       line-height: 30px;
     }
-    video {
-      margin-top: 40px;
-      width: 100%;
-      max-width: 600px;
-      border: 2px solid red;
-      border-radius: 10px;
-      display: none;
-    }
   </style>
 </head>
 <body>
-  <h1>⚠️ ATTENTION : Cliquez pour lancer le piratage</h1>
-  <button onclick="startPiratage()">Lancer le piratage</button>
 
-  <div id="progress-bar">
-    <div id="progress">0%</div>
-  </div>
-
-  <video id="hack-video" loop>
-    <source src="https://youtu.be/k0J6MeEfFAc?si=KJ8htfLtiMyeUvDJ">
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="background.mp4" type="video/mp4">
     Votre navigateur ne supporte pas la vidéo.
   </video>
 
-  <audio id="alert-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-warning-alarm-buzzer-991.mp3"></audio>
+  <div class="content">
+    <h1>⚠️ ATTENTION : Vous avez été piraté ⚠️</h1>
+    <div id="progress-bar">
+      <div id="progress">0%</div>
+    </div>
+  </div>
 
   <script>
-    function startPiratage() {
-      const video = document.getElementById("hack-video");
-      const sound = document.getElementById("alert-sound");
-      const bar = document.getElementById("progress");
-      const progressBar = document.getElementById("progress-bar");
-
-      video.style.display = "block";
-      progressBar.style.display = "block";
-
-      video.play();
-      sound.play();
-      if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
-
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += 2;
-        bar.style.width = progress + "%";
-        bar.textContent = progress + "%";
-        if (progress >= 100) {
-          clearInterval(interval);
-          bar.textContent = "Téléchargement terminé";
-        }
-      }, 100);
-    }
+    const progress = document.getElementById("progress");
+    let value = 0;
+    const interval = setInterval(() => {
+      value += 2;
+      progress.style.width = value + "%";
+      progress.textContent = value + "%";
+      if (value >= 100) {
+        clearInterval(interval);
+        progress.textContent = "Téléchargement terminé";
+      }
+    }, 100);
   </script>
 </body>
 </html>
+
 
